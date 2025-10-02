@@ -49,6 +49,12 @@ public class UserService {
 		
 	}
 
+	public void balanceEnquiry(Long id)
+	{
+		User user=userRepository.findById(id)
+				.orElseThrow(() ->new RuntimeException("User not found"));
+		System.out.println("Balance"+user.getBalance());
+	}
 }
 
 
