@@ -13,7 +13,7 @@ public class SecurityConfigure {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/h2-console/**").permitAll()
-                .anyRequest().authenticated())
+                .anyRequest().permitAll())
             .headers(headers -> headers.frameOptions().sameOrigin());
         return http.build();
     }
