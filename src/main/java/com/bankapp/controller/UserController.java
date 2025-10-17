@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bankapp.model.Transaction;
 import com.bankapp.model.User;
+import com.bankapp.repository.TransactionRepository;
 import com.bankapp.repository.UserRepository;
 import com.bankapp.service.UserService;
 
@@ -23,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+	@Autowired
+	private TransactionRepository transactionRepository;
+  
     
     @Autowired
     private UserService userService;
@@ -82,6 +87,15 @@ public class UserController {
     	userService.transfer(fromId,toId,amount);
     	return "Transfer successful!";
     }
+//    @GetMapping("/user/{id}")
+//	public List<Transaction> getTransactionByUser(@PathVariable Long userId){
+//		return transactionRepository.findByUserId(userId);
+//	}
+	@GetMapping("/{id}/transactions")
+	public List<Transaction> getUserTransactions(@PathVariable Long id) {
+	    return transactionRepository.findByUserId(id);
+	}
+    
      
 
 }
